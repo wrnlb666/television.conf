@@ -1,0 +1,33 @@
+[metadata]
+name = "yay"
+description = "Browse repository and AUR packages, preview info or PKGBUILDs, and install selections"
+requirements = ["yay"]
+
+[source]
+command = [
+  { name = "Repo", run = "yay -SlqN" },
+  { name = "AUR", run = "yay -Slqa" },
+]
+
+[preview]
+command = ["yay -Sii '{}'", "yay -Gp '{}'"]
+
+[ui]
+preview_panel = { size = 75 }
+
+[keybindings]
+# Toggle selection and move; install all selected packages (or the current one).
+tab = "toggle_selection_down"
+# Television 0.15: toggle, then move back to keep the cursor on this entry.
+space = ["toggle_selection_down", "select_prev_entry"]
+backtab = "toggle_selection_up"
+ctrl-f = "cycle_previews"
+ctrl-s = "cycle_sources"
+enter = "actions:install"
+
+[actions.install]
+description = "Install selected packages"
+# Leave {} unquoted so selected package names become separate arguments.
+command = "yay -S --noconfirm {}"
+separator = " "
+mode = "execute"
