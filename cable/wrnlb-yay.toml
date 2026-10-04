@@ -5,8 +5,9 @@ requirements = ["yay"]
 
 [source]
 command = [
-  { name = "Repo", run = "yay -SlqN" },
-  { name = "AUR", run = "yay -Slqa" },
+    { name = "Repo", run = "yay -SlqN" },
+    { name = "Update", run = "yay -Qqua" },
+    { name = "AUR", run = "yay -Slqa" },
 ]
 
 [preview]
