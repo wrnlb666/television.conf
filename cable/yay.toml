@@ -1,0 +1,61 @@
+[metadata]
+name = "yay"
+description = "Browse repository and AUR packages, preview info or PKGBUILDs, and perform actions"
+requirements = ["yay"]
+
+[source]
+command = [
+    { name = "Repo", run = "yay -SlqN" },
+    { name = "Update", run = "yay -Quqa" },
+    { name = "AUR", run = "yay -Slqa" },
+]
+no_sort = true
+
+[preview]
+command = [
+    "yay -Q '{}' >/dev/null 2>&1 && echo -e '[Installed]\n' || echo -e '\n'; yay -Sii '{}'",
+    "yay -Q '{}' >/dev/null 2>&1 && echo -e '[Installed]\n' || echo -e '\n'; yay -Gp '{}'",
+]
+
+[ui.preview_panel]
+size = 75
+word_wrap = true
+
+[keybindings]
+# Toggle selection and move; install all selected packages (or the current one).
+tab = "toggle_selection_down"
+# Television 0.15: toggle, then move back to keep the cursor on this entry.
+space = ["toggle_selection_down", "select_prev_entry"]
+backtab = "toggle_selection_up"
+ctrl-f = "cycle_previews"
+ctrl-s = "cycle_sources"
+enter = "actions:perform"
+ctrl-i = "actions:install"
+ctrl-u = "actions:update"
+ctrl-r = "actions:remove"
+
+[actions.perform]
+description = "Install selected packages and exit"
+# Leave {} unquoted so selected package names become separate arguments.
+command = "yay -S --noconfirm {}"
+separator = " "
+mode = "execute"
+
+[actions.install]
+description = "Install selected packages"
+# Leave {} unquoted so selected package names become separate arguments.
+command = "yay -S --noconfirm {}; tv yay"
+separator = " "
+mode = "execute"
+
+[actions.update]
+description = "Update the system"
+command = "yay -Syu --noconfirm; tv yay"
+mode = "execute"
+
+[actions.remove]
+description = "Remove selected packages"
+# Leave {} unquoted so selected package names become separate arguments.
+command = "yay -Rns --noconfirm {}; tv yay"
+separator = " "
+mode = "execute"
