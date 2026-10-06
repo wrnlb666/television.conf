@@ -44,18 +44,18 @@ mode = "execute"
 [actions.install]
 description = "Install selected packages"
 # Leave {} unquoted so selected package names become separate arguments.
-command = "yay -S --noconfirm {}; tv yay"
+command = "yay -S --noconfirm {}; printf '\e[32m\nPress any key to return to yay...\e[0m'; read -rsn 1; tv yay"
 separator = " "
 mode = "execute"
 
 [actions.update]
 description = "Update the system"
-command = "yay -Syu --noconfirm; tv yay"
+command = "yay -Syu --noconfirm; printf '\e[32m\nPress any key to return to yay...\e[0m'; read -rsn 1; tv yay"
 mode = "execute"
 
 [actions.remove]
 description = "Remove selected packages"
 # Leave {} unquoted so selected package names become separate arguments.
-command = "yay -Rns --noconfirm {}; tv yay"
+command = "yay -Rns --noconfirm {}; printf '\e[32m\nPress any key to return to yay...\e[0m'; read -rsn 1; tv yay"
 separator = " "
 mode = "execute"
