@@ -13,8 +13,8 @@ no_sort = true
 
 [preview]
 command = [
-    "yay -Q '{}' >/dev/null 2>&1 && echo -e '[Installed]\n' || echo -e '\n'; yay -Sii '{}'",
-    "yay -Q '{}' >/dev/null 2>&1 && echo -e '[Installed]\n' || echo -e '\n'; yay -Gp '{}'",
+    "yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || echo -e '\n'; yay -Sii '{}'",
+    "yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || echo -e '\n'; yay -Gp '{}'",
 ]
 
 [ui.preview_panel]
