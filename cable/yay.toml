@@ -13,8 +13,17 @@ no_sort = true
 
 [preview]
 command = [
-    "yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || echo -e '\n'; yay -Sii '{}'",
-    "yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || echo -e '\n'; yay -Gp '{}'",
+    # package info
+    """
+    yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || echo -e '\n';
+    yay -Sii '{}'
+    """,
+
+    # package pkgbuild
+    """
+    yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || echo -e '\n';
+    yay -Gp '{}'
+    """,
 ]
 
 [ui.preview_panel]
@@ -44,18 +53,33 @@ mode = "execute"
 [actions.install]
 description = "Install selected packages"
 # Leave {} unquoted so selected package names become separate arguments.
-command = "yay -S --noconfirm {}; printf '\e[32m\nPress any key to return to yay...\e[0m'; read -rsn 1; tv yay"
+command = """
+yay -S --noconfirm {};
+printf '\e[32m\nPress any key to return to yay...\e[0m';
+read -rsn 1;
+tv yay
+"""
 separator = " "
 mode = "execute"
 
 [actions.update]
 description = "Update the system"
-command = "yay -Syu --noconfirm; printf '\e[32m\nPress any key to return to yay...\e[0m'; read -rsn 1; tv yay"
+command = """
+yay -Syu --noconfirm;
+printf '\e[32m\nPress any key to return to yay...\e[0m';
+read -rsn 1;
+tv yay
+"""
 mode = "execute"
 
 [actions.remove]
 description = "Remove selected packages"
 # Leave {} unquoted so selected package names become separate arguments.
-command = "yay -Rns --noconfirm {}; printf '\e[32m\nPress any key to return to yay...\e[0m'; read -rsn 1; tv yay"
+command = """
+yay -Rns --noconfirm {};
+printf '\e[32m\nPress any key to return to yay...\e[0m';
+read -rsn 1;
+tv yay
+"""
 separator = " "
 mode = "execute"
