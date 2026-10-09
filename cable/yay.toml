@@ -1,7 +1,7 @@
 [metadata]
 name = "yay"
 description = "Browse repository and AUR packages, preview info or PKGBUILDs, and perform actions"
-requirements = ["yay"]
+requirements = ["yay", "bat"]
 
 [source]
 command = [
@@ -14,16 +14,16 @@ no_sort = true
 [preview]
 command = [
     # package info
-    """
-    yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || echo -e '\n';
+    '''
+    yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || printf '\e[32m[Not Installed]\n\n\e[0m';
     yay -Sii '{}'
-    """,
+    ''',
 
     # package pkgbuild
-    """
-    yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || echo -e '\n';
-    yay -Gp '{}'
-    """,
+    '''
+    yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || printf '\e[32m[Not Installed]\n\n\e[0m';
+    yay -Gp '{}' | bat --language=bash --color=always --style=numbers --paging=never
+    ''',
 ]
 
 [ui.preview_panel]
@@ -53,33 +53,33 @@ mode = "execute"
 [actions.install]
 description = "Install selected packages"
 # Leave {} unquoted so selected package names become separate arguments.
-command = """
+command = '''
 yay -S --noconfirm {};
 printf '\e[32m\nPress any key to return to yay...\e[0m';
 read -rsn 1;
 tv yay
-"""
+'''
 separator = " "
 mode = "execute"
 
 [actions.update]
 description = "Update the system"
-command = """
+command = '''
 yay -Syu --noconfirm;
 printf '\e[32m\nPress any key to return to yay...\e[0m';
 read -rsn 1;
 tv yay
-"""
+'''
 mode = "execute"
 
 [actions.remove]
 description = "Remove selected packages"
 # Leave {} unquoted so selected package names become separate arguments.
-command = """
+command = '''
 yay -Rns --noconfirm {};
 printf '\e[32m\nPress any key to return to yay...\e[0m';
 read -rsn 1;
 tv yay
-"""
+'''
 separator = " "
 mode = "execute"
