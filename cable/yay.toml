@@ -8,6 +8,7 @@ command = [
     { name = "Repo", run = "yay -SlqN" },
     { name = "Update", run = "yay -Quqa" },
     { name = "+AUR", run = "yay -Slq" },
+    { name = "Update+Repo", run = "yay -Quq" },
 ]
 no_sort = true
 
