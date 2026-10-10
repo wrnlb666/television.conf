@@ -22,14 +22,14 @@ command = [
 
     # package pkgbuild
     '''
-    yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m[Installed]\n\n\e[0m' || printf '\e[32m[Not Installed]\n\n\e[0m';
-    yay -Gp '{}' | bat --language=bash --color=always --style=numbers --paging=never
+    yay -Q '{}' >/dev/null 2>&1 && printf '\e[32m\t[Installed]\n\n\e[0m' || printf '\e[32m\t[Not Installed]\n\n\e[0m';
+    yay -Gp '{}' | bat --language=bash --color=always -n
     ''',
 ]
 
 [ui.preview_panel]
 size = 75
-word_wrap = true
+word_wrap = false
 
 [keybindings]
 # Toggle selection and move; install all selected packages (or the current one).
